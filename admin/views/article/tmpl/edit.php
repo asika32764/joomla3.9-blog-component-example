@@ -1,5 +1,7 @@
 <?php
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die;
 ?>
 <form action="<?php echo JUri::getInstance(); ?>" id="adminForm" name="adminForm" method="post">
@@ -28,6 +30,12 @@ defined('_JEXEC') or die;
             <div class="controls">
                 <?php echo JHtml::calendar($this->item->created, 'created', 'form-created'); ?>
             </div>
+        </div>
+
+        <!-- Published -->
+        <div class="control-group">
+            <label for="form-created" class="control-label">Published</label>
+            <?php echo HTMLHelper::_('select.booleanlist', 'published', array(), $this->item->published); ?>
         </div>
     </fieldset>
 

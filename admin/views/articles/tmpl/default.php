@@ -24,6 +24,7 @@ $currentDir   = $this->state->get('list.direction', 'asc');
         <tr>
             <th><?php echo HTMLHelper::_('grid.sort', 'ID', 'id', $currentDir, $currentOrder); ?></th>
             <th><?php echo HTMLHelper::_('grid.sort', 'Title', 'title', $currentDir, $currentOrder); ?></th>
+            <th><?php echo HTMLHelper::_('grid.sort', 'Published', 'published', $currentDir, $currentOrder); ?></th>
             <th><?php echo HTMLHelper::_('grid.sort', 'Intro', 'introtext', $currentDir, $currentOrder); ?></th>
             <th><?php echo HTMLHelper::_('grid.sort', 'Delete', 'delete', $currentDir, $currentOrder); ?></th>
         </tr>
@@ -36,6 +37,13 @@ $currentDir   = $this->state->get('list.direction', 'asc');
                     <a href='<?php echo JRoute::_("index.php?option=com_blog&task=article.edit&id=" . $item->id); ?>'>
                         <?php echo $this->escape($item->title); ?>
                     </a>
+                </td>
+                <td>
+                    <?php if ($item->published): ?>
+                        <span class="label label-success">發佈</span>
+                    <?php else: ?>
+                        <span class="label label-important">未發佈</span>
+                    <?php endif; ?>
                 </td>
                 <td><?php echo StringHelper::substr(strip_tags($item->introtext), 0, 50); ?></td>
                 <td>
