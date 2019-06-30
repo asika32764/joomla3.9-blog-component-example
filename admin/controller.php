@@ -1,7 +1,6 @@
 <?php
 
 use Joomla\CMS\MVC\Controller\BaseController;
-use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;
 

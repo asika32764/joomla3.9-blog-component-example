@@ -2,6 +2,7 @@
 
 use Joomla\CMS\Editor\Editor;
 use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 defined('_JEXEC') or die;
 
@@ -23,8 +24,9 @@ class BlogViewArticle extends HtmlView
 
     public function addToolbar()
     {
-        JToolbarHelper::title('Article Edit', 'pencil');
+        ToolbarHelper::title('Article Edit', 'pencil');
 
-        JToolbarHelper::save('article.save');
+        ToolbarHelper::save('article.save');
+        ToolbarHelper::cancel('article.cancel');
     }
 }

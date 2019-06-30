@@ -34,4 +34,9 @@ class BlogControllerArticle extends BaseController
         // save() 完成後我們跳回 Article List 頁面
         $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false));
     }
+
+    public function cancel()
+    {
+        $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false));
+    }
 }
