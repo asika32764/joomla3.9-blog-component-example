@@ -18,7 +18,11 @@ defined('_JEXEC') or die;
         <?php foreach ($this->items as $item): ?>
             <tr>
                 <td><?php echo $item->id; ?></td>
-                <td><?php echo $this->escape($item->title); ?></td>
+                <td>
+                    <a href='<?php echo JRoute::_("index.php?option=com_blog&task=article.edit&id=" . $item->id); ?>'>
+                        <?php echo $this->escape($item->title); ?>
+                    </a>
+                </td>
                 <td><?php echo StringHelper::substr(strip_tags($item->introtext), 0, 50); ?></td>
                 <td>
                     <a href='<?php echo JRoute::_('index.php?option=com_blog&task=article.delete&id=' . $item->id) ?>' class="btn">

@@ -12,12 +12,20 @@ class BlogControllerArticle extends BaseController
         $this->setRedirect(Route::_('index.php?option=com_blog&view=article&layout=edit', false));
     }
 
+    public function edit()
+    {
+        $id = $this->input->get('id');
+
+        $this->setRedirect(Route::_('index.php?option=com_blog&view=article&layout=edit&id=' . $id, false));
+    }
+
     public function save()
     {
         // 只取得 POST 的資料
         $post = $this->input->post;
 
         // 將 POST 資料塞進一個陣列中，用 getString() 避免不合法字元
+        $data['id']      = $post->getInt('id');
         $data['title']   = $post->getString('title');
         $data['alias']   = $post->getString('alias');
         $data['created'] = $post->getString('created');
@@ -32,12 +40,12 @@ class BlogControllerArticle extends BaseController
         $model->save($data);
 
         // save() 完成後我們跳回 Article List 頁面
-        $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false));
+        $this->setRedirect(Route::_('index.php?option=com_blog&view=articles', false));
     }
 
     public function cancel()
     {
-        $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false));
+        $this->setRedirect(Route::_('index.php?option=com_blog&view=articles', false));
     }
 
     public function delete()
@@ -46,7 +54,7 @@ class BlogControllerArticle extends BaseController
 
         if (!$id)
         {
-            $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false), '沒有 ID', 'warning');
+            $this->setRedirect(Route::_('index.php?option=com_blog&view=articles', false), '沒有 ID', 'warning');
 
             return false;
         }
@@ -55,6 +63,6 @@ class BlogControllerArticle extends BaseController
 
         $model->delete($id);
 
-        $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false), '刪除成功');
+        $this->setRedirect(Route::_('index.php?option=com_blog&view=articles', false), '刪除成功');
     }
 }

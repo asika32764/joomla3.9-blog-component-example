@@ -1,4 +1,5 @@
 <?php
+
 defined('_JEXEC') or die;
 ?>
 <form action="<?php echo JUri::getInstance(); ?>" id="adminForm" name="adminForm" method="post">
@@ -9,7 +10,7 @@ defined('_JEXEC') or die;
         <div class="control-group">
             <label for="form-title" class="control-label">Title</label>
             <div class="controls">
-                <input type="text" id="form-title" name="title" value="" />
+                <input type="text" id="form-title" name="title" value="<?php echo $this->item->title; ?>" />
             </div>
         </div>
 
@@ -17,7 +18,7 @@ defined('_JEXEC') or die;
         <div class="control-group">
             <label for="form-alias" class="control-label">Alias</label>
             <div class="controls">
-                <input type="text" id="form-alias" name="alias" value="" />
+                <input type="text" id="form-alias" name="alias" value="<?php echo $this->item->alias; ?>" />
             </div>
         </div>
 
@@ -25,7 +26,7 @@ defined('_JEXEC') or die;
         <div class="control-group">
             <label for="form-created" class="control-label">Created Time</label>
             <div class="controls">
-                <?php echo JHtml::calendar('now', 'created', 'form-created'); ?>
+                <?php echo JHtml::calendar($this->item->created, 'created', 'form-created'); ?>
             </div>
         </div>
     </fieldset>
@@ -53,6 +54,7 @@ defined('_JEXEC') or die;
     </fieldset>
 
     <div class="hidden-inputs">
+        <input type="hidden" name="id" value="<?php echo $this->item->id; ?>" />
         <input type="hidden" name="option" value="com_blog" />
         <input type="hidden" name="task" value="" />
     </div>
