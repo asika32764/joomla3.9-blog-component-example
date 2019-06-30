@@ -8,6 +8,6 @@ class BlogViewExample extends HtmlView
 {
     public function display($tpl = null)
     {
-        echo 'Example View Display.';
+        parent::display($tpl);
     }
 }
