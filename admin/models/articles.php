@@ -58,7 +58,7 @@ class BlogModelArticles extends BaseDatabaseModel
             $query->where($conditions);
         }
 
-        $query->select('SQL_CALC_FOUND_ROWS *')
+        $query->select('*')
             ->from('#__blog_articles')
             // 這裡放上抓進來的 order
             ->order($ordering . ' ' . $direction);
@@ -71,7 +71,16 @@ class BlogModelArticles extends BaseDatabaseModel
 
     public function getPagination()
     {
-        $total = $this->_db->setQuery('SELECT FOUND_ROWS()')->loadResult();
+        // 不加 true 拿回原本的 query
+        $query = $this->_db->getQuery();
+
+        // 更改 select 成 COUNT(*)
+        $query->clear('select')
+            ->clear('limit')
+            ->select('COUNT(*)');
+
+        // 進行第二次查詢，拿出 total 值
+        $total = $this->_db->setQuery($query)->loadResult();
         $limit = (int) $this->getState('list.limit', 5);
         $start = (int) $this->getState('list.start', 0);
 
