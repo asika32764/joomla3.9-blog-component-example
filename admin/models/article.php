@@ -7,9 +7,16 @@ defined('_JEXEC') or die;
 
 class BlogModelArticle extends BaseDatabaseModel
 {
+    public function getTable($name = 'Article', $prefix = 'BlogTable', $options = array())
+    {
+        return parent::getTable($name, $prefix, $options);
+    }
+    
     public function getItem()
     {
-        $input = Factory::getApplication()->input;
+        $table = $this->getTable();
+
+        $input = JFactory::getApplication()->input;
 
         $id = $input->get('id');
 
@@ -18,38 +25,24 @@ class BlogModelArticle extends BaseDatabaseModel
             return false;
         }
 
-        $sql = "SELECT * FROM #__blog_articles WHERE id = " . $id;
+        $table->load($id);
 
-        return $this->_db->setQuery($sql)->loadObject();
+        return $table;
     }
 
     public function save($data)
     {
-        $db = $this->_db;
+        $table = $this->getTable();
 
-        $id = $data['id'];
+        $table->bind($data);
 
-        $data = (object) $data;
-
-        // 有 id 時用 update
-        if ($id)
-        {
-            $db->updateObject('#__blog_articles', $data, 'id');
-        }
-
-        // 沒有 id 時用 insert
-        else
-        {
-            $db->insertObject('#__blog_articles', $data);
-        }
-
-        return true;
+        return $table->store();
     }
 
     public function delete($id)
     {
-        $sql = "DELETE FROM #__blog_articles WHERE id = " . (int) $id;
+        $table = $this->getTable();
 
-        return $this->_db->setQuery($sql)->execute();
+        return $table->delete($id);
     }
 }
