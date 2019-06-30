@@ -1,8 +1,13 @@
 <?php
 
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\String\StringHelper;
 
 defined('_JEXEC') or die;
+
+// 取得目前的排序狀態
+$currentOrder = $this->state->get('list.ordering', 'asc');
+$currentDir   = $this->state->get('list.direction', 'asc');
 ?>
 <form action="<?php echo JUri::getInstance(); ?>" id="adminForm" name="adminForm" method="post">
     <div class="filter-bar">
@@ -17,10 +22,10 @@ defined('_JEXEC') or die;
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Intro</th>
-            <th>Delete</th>
+            <th><?php echo HTMLHelper::_('grid.sort', 'ID', 'id', $currentDir, $currentOrder); ?></th>
+            <th><?php echo HTMLHelper::_('grid.sort', 'Title', 'title', $currentDir, $currentOrder); ?></th>
+            <th><?php echo HTMLHelper::_('grid.sort', 'Intro', 'introtext', $currentDir, $currentOrder); ?></th>
+            <th><?php echo HTMLHelper::_('grid.sort', 'Delete', 'delete', $currentDir, $currentOrder); ?></th>
         </tr>
         </thead>
         <tbody>
@@ -46,5 +51,8 @@ defined('_JEXEC') or die;
     <div class="hidden-inputs">
         <input type="hidden" name="option" value="com_blog" />
         <input type="hidden" name="task" value="" />
+
+        <input name="filter_order" type="hidden" value="<?php echo $currentDir; ?>" />
+        <input name="filter_order_Dir" type="hidden" value="<?php echo $currentDir ?>" />
     </div>
 </form>

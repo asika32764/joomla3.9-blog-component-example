@@ -16,6 +16,9 @@ class BlogModelArticles extends BaseDatabaseModel
             'filter.search',
             $app->getUserStateFromRequest('blog.articles.search', 'filter_search')
         );
+
+        $this->setState('list.ordering', $app->getUserStateFromRequest('blog.articles.ordering', 'filter_order'));
+        $this->setState('list.direction', $app->getUserStateFromRequest('blog.articles.direction', 'filter_order_Dir'));
     }
 
     public function getItems()
@@ -24,7 +27,10 @@ class BlogModelArticles extends BaseDatabaseModel
 
         $query = $db->getQuery(true);
 
-        // 接下來從 state 中把 search 內容拿出來
+        // 把 order 用的 state 拿出來（第二個參數是不存在時的預設值）
+        $ordering   = $this->getState('list.ordering', 'id');
+        $direction = $this->getState('list.direction', 'asc');
+
         $search = $this->getState('filter.search');
 
         // 如果有的話，就加上 LIKE 的 SQL 來做搜尋
@@ -39,9 +45,8 @@ class BlogModelArticles extends BaseDatabaseModel
 
         $query->select('*')
             ->from('#__blog_articles')
-            ->order('id ASC');
-
-        $db->setQuery($query);
+            // 這裡放上抓進來的 order
+            ->order($ordering . ' ' . $direction);
 
         $db->setQuery($query);
 
