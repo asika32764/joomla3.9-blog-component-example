@@ -1,6 +1,5 @@
 <?php
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 defined('_JEXEC') or die;
@@ -9,13 +8,15 @@ class BlogModelArticles extends BaseDatabaseModel
 {
     public function getItems()
     {
-        $db = Factory::getDbo();
+        $db = $this->_db;
 
-        // Or using $db = $this->_db;
+        $query = $db->getQuery(true);
 
-        $sql = "SELECT * FROM #__blog_articles";
+        $query->select('*')
+            ->from('#__blog_articles')
+            ->order('id ASC');
 
-        $db->setQuery($sql);
+        $db->setQuery($query);
 
         // If not thing found, return empty array.
         return $db->loadObjectList() ? : array();
