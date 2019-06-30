@@ -1,5 +1,6 @@
 <?php
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 defined('_JEXEC') or die;
@@ -8,7 +9,7 @@ class BlogModelArticles extends BaseDatabaseModel
 {
     public function getItems()
     {
-        $db = JFactory::getDbo();
+        $db = Factory::getDbo();
 
         // Or using $db = $this->_db;
 
