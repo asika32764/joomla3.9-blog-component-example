@@ -25,6 +25,6 @@ class BlogViewArticle extends HtmlView
     {
         JToolbarHelper::title('Article Edit', 'pencil');
 
-        JToolbarHelper::save('save');
+        JToolbarHelper::save('article.save');
     }
 }

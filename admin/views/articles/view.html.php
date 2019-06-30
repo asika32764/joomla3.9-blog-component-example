@@ -20,6 +20,6 @@ class BlogViewArticles extends HtmlView
     {
         ToolbarHelper::title('Articles');
 
-        JToolbarHelper::addNew('add');
+        JToolbarHelper::addNew('article.add');
     }
 }
