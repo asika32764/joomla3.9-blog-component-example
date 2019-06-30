@@ -28,7 +28,7 @@ defined('_JEXEC') or die;
         <div class="control-group">
             <label for="form-created" class="control-label">Created Time</label>
             <div class="controls">
-                <?php echo JHtml::calendar($this->item->created, 'created', 'form-created'); ?>
+                <?php echo HTMLHelper::_('calendar', $this->item->created, 'created', 'form-created'); ?>
             </div>
         </div>
 
