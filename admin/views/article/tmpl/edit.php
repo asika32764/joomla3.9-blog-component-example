@@ -51,4 +51,9 @@ defined('_JEXEC') or die;
             </div>
         </div>
     </fieldset>
+
+    <div class="hidden-inputs">
+        <input type="hidden" name="option" value="com_blog" />
+        <input type="hidden" name="task" value="" />
+    </div>
 </form>
