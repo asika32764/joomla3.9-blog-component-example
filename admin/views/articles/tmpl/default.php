@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
             <th>ID</th>
             <th>Title</th>
             <th>Intro</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,11 @@ defined('_JEXEC') or die;
                 <td><?php echo $item->id; ?></td>
                 <td><?php echo $this->escape($item->title); ?></td>
                 <td><?php echo StringHelper::substr(strip_tags($item->introtext), 0, 50); ?></td>
+                <td>
+                    <a href='<?php echo JRoute::_('index.php?option=com_blog&task=article.delete&id=' . $item->id) ?>' class="btn">
+                        <span class="icon-trash text-error"></span>
+                    </a>
+                </td>
             </tr>
         <?php endforeach; ?>
         </tbody>

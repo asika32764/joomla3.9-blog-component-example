@@ -24,4 +24,11 @@ class BlogModelArticle extends BaseDatabaseModel
 
         return $db->execute();
     }
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM #__blog_articles WHERE id = " . (int) $id;
+
+        return $this->_db->setQuery($sql)->execute();
+    }
 }

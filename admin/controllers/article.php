@@ -39,4 +39,22 @@ class BlogControllerArticle extends BaseController
     {
         $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false));
     }
+
+    public function delete()
+    {
+        $id = $this->input->get('id');
+
+        if (!$id)
+        {
+            $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false), '沒有 ID', 'warning');
+
+            return false;
+        }
+
+        $model = $this->getModel('Article');
+
+        $model->delete($id);
+
+        $this->setRedirect(JRoute::_('index.php?option=com_blog&view=articles', false), '刪除成功');
+    }
 }
