@@ -9,8 +9,8 @@ class BlogController extends BaseController
     public function display($cachable = false, $urlparams = array())
     {
         // Get model & view
-        $model = $this->getModel('Example');
-        $view = $this->getView('Example', 'html');
+        $model = $this->getModel('Articles');
+        $view = $this->getView('Articles', 'html');
 
         // Push model into view
         $view->setModel($model, true);
