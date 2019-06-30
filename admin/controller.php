@@ -12,11 +12,8 @@ class BlogController extends BaseController
         $model = $this->getModel('Example');
         $view = $this->getView('Example', 'html');
 
-        // Get item
-        $item = $model->getItem();
-
-        // Push item into view
-        $view->item = $item;
+        // Push model into view
+        $view->setModel($model, true);
 
         $view->display();
     }
