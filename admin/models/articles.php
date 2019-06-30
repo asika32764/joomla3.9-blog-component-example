@@ -11,7 +11,7 @@ class BlogModelArticles extends BaseDatabaseModel
     {
         $app = Factory::getApplication();
 
-        // 我們把 filter_search 從 request 中拿出來，暫存在 filter.search 的 state 中
+        $this->setState('filter.published', $app->getUserStateFromRequest('blog.articles.published', 'filter_published'));
         $this->setState(
             'filter.search',
             $app->getUserStateFromRequest('blog.articles.search', 'filter_search')
@@ -30,6 +30,12 @@ class BlogModelArticles extends BaseDatabaseModel
         // 把 order 用的 state 拿出來（第二個參數是不存在時的預設值）
         $ordering   = $this->getState('list.ordering', 'id');
         $direction = $this->getState('list.direction', 'asc');
+        $published = $this->getState('filter.published', '');
+
+        if ($published !== '')
+        {
+            $query->where('published = ' . $query->quote($published));
+        }
 
         $search = $this->getState('filter.search');
 
