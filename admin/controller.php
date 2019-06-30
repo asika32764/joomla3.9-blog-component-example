@@ -8,7 +8,9 @@ class BlogController extends BaseController
 {
     public function display($cachable = false, $urlparams = array())
     {
-        echo 'Display Task';
+        $view = $this->getView('Example', 'html');
+
+        $view->display();
     }
 
     public function flower()
