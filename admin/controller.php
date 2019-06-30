@@ -1,6 +1,7 @@
 <?php
 
 use Joomla\CMS\MVC\Controller\BaseController;
+use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;
 
@@ -23,5 +24,10 @@ class BlogController extends BaseController
         $view->setLayout($layout);
 
         $view->display();
+    }
+
+    public function add()
+    {
+        $this->setRedirect(Route::_('index.php?option=com_blog&view=article&layout=edit', false));
     }
 }
